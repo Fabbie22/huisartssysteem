@@ -13,8 +13,8 @@ function dbcon(){
 function patienten($dbh){
       $patient = array();
 
-      $patientquery = $dbh->prepare("SELECT voor_naam, achter_naam, postcode, plaats, telefoonnummer
-      FROM patient LIMIT 10");
+      $patientquery = $dbh->prepare("SELECT patient_id, voor_naam, achter_naam, postcode, plaats, telefoonnummer
+      FROM patient");
 
       $patientquery->execute();
 

@@ -102,7 +102,7 @@ $dbh = dbcon();
     echo "<td>".$data['plaats']."</td>";
     echo "<td>".$data['telefoonnummer']."</td>";
     echo "<td><button class='btn btn-primary' style='width: 100%;'><i class='fa-solid fa-eye' style='color: #ffffff;'></i> / <i class='fa-regular fa-pen-to-square' style='color: #ffffff;'></i></button></td>";
-    echo "<td><button class='btn btn-danger' style='width: 100%;'><i class='fa-solid fa-trash-can' style='color: #ffffff;'></i></button></td>";
+    echo "<td><a href='delete.php?patient_id=".$data['patient_id']."'><button class='btn btn-danger' style='width: 100%;'><i class='fa-solid fa-trash-can'></button></a></td>";
     echo "</tr>";
   }
 ?>
