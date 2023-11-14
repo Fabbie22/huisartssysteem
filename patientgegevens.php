@@ -2,8 +2,9 @@
 require_once("./connection.php");
 
 $dbh = dbcon();
+
+$datum = date('Y/m/d');
 ?>
-<!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
@@ -35,7 +36,11 @@ $dbh = dbcon();
         {
             $patient_id = $_GET['patient_id'];
 
-            $query = "SELECT * FROM patient WHERE patient_id=:patient_id LIMIT 1";
+            $query = "SELECT * FROM patient 
+            INNER JOIN patient_has_notitie 
+            ON patient_has_notitie.patient_patient_id = patient.patient_id 
+            INNER JOIN notitie
+            ON notitie.notitie_id = patient_has_notitie.notitie_notitie_id WHERE patient_id=:patient_id";
             $statement = $dbh->prepare($query);
             $data = [':patient_id' => $patient_id];
             $statement->execute($data);
@@ -44,9 +49,9 @@ $dbh = dbcon();
                         }
                         ?>
 <div class="container">
-<form action='patientdetail.php' method="POST" enctype="multipart/form-data" class="col-md-6">
+<form action='addfunctions.php' method="POST" enctype="multipart/form-data" class="col-md-6">
 
-<input type="hidden" name="id" value="<?=$result['patient_id']?>" />
+<input type="hidden" name="patient_id" value="<?=$result['patient_id']?>" />
   <div class="row">
             <div class="col-md-6">
                 <label for="voor_naam" class="form-label">Voornaam</label>
@@ -89,7 +94,8 @@ $dbh = dbcon();
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="./addpatient.php" method="post">
+        <form action="./addfunctions.php" method="post">
+        <input type="hidden" name="patient_id" value="<?=$result['patient_id']?>" />
         <div class="row">
           <div class="col-md-12">
             <input type="text" class="form-control" placeholder="Onderwerp (max 50 tekens)" aria-label="Onderwerp" name="onderwerp" id="onderwerp" maxlength="50" required>
@@ -101,7 +107,7 @@ $dbh = dbcon();
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
-      <button type="submit" class="btn btn-primary">Notitie Toevoegen</button>
+      <button type="submit" class="btn btn-primary" name="notitietoevoegen">Notitie Toevoegen</button>
     </div>
   </form>
 

@@ -44,7 +44,7 @@ $dbh = dbcon();
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="./addpatient.php" method="post">
+        <form action="./addfunctions.php" method="post">
         <div class="row">
           <div class="col-md-6">
             <input type="text" class="form-control" placeholder="Voornaam" aria-label="Voornaam" name="voor_naam" id="voor_naam" required>
@@ -71,7 +71,7 @@ $dbh = dbcon();
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
-      <button type="submit" class="btn btn-primary">Patiënt Toevoegen</button>
+      <button type="submit" class="btn btn-primary" name="patienttoevoegen">Patiënt Toevoegen</button>
     </div>
   </form>
 </div>
