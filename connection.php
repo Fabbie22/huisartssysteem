@@ -24,3 +24,19 @@ function patienten($dbh){
 
       return $patient;
 }
+function notities($dbh, $id){
+      $notitie = array();
+
+      $notitiequery = $dbh->prepare("SELECT notitie.datum, notitie.onderwerp, notitie.tekst  FROM patient 
+      INNER JOIN patient_has_notitie 
+      ON patient_has_notitie.patient_patient_id = patient.patient_id 
+      INNER JOIN notitie
+      ON notitie.notitie_id = patient_has_notitie.notitie_notitie_id WHERE patient_id= $id ORDER BY datum");
+
+      $notitiequery->execute();
+
+      while($row = $notitiequery->fetch(PDO::FETCH_ASSOC)){
+            $notitie[] = $row;
+      }
+      return $notitie;      
+}

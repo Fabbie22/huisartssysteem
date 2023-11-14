@@ -36,20 +36,16 @@ $datum = date('Y/m/d');
         {
             $patient_id = $_GET['patient_id'];
 
-            $query = "SELECT * FROM patient 
-            INNER JOIN patient_has_notitie 
-            ON patient_has_notitie.patient_patient_id = patient.patient_id 
-            INNER JOIN notitie
-            ON notitie.notitie_id = patient_has_notitie.notitie_notitie_id WHERE patient_id=:patient_id";
+            $query = "SELECT * FROM patient WHERE patient_id=:patient_id";
             $statement = $dbh->prepare($query);
             $data = [':patient_id' => $patient_id];
             $statement->execute($data);
-
+          
             $result = $statement->fetch(PDO::FETCH_ASSOC);
                         }
                         ?>
 <div class="container">
-<form action='addfunctions.php' method="POST" enctype="multipart/form-data" class="col-md-6">
+<form action='addfunctions.php' method="POST" enctype="multipart/form-data">
 
 <input type="hidden" name="patient_id" value="<?=$result['patient_id']?>" />
   <div class="row">
@@ -81,11 +77,12 @@ $datum = date('Y/m/d');
                 <label for="telefoonnummer" class="form-label">Telefoonnummer</label>
                 <input type="text" class="form-control" id="telefoonnummer" name="telefoonnummer" value="<?=$result['telefoonnummer']?>" />
             </div>
-        <button type="submit" name="update_button" class="btn btn-primary topgap2"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i> Opslaan</button>
+        <button type="submit" name="update_button" class="btn btn-primary topgap2 col-md-6"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i> Opslaan</button>
+        <button type="button" class='btn btn-success topgap2 col-md-6' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Notitie Toevoegen</button></a>
+
     </form>
   </div>
 </div>
-<button type="button" class='btn btn-success' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Notitie Toevoegen</button></a>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -110,7 +107,29 @@ $datum = date('Y/m/d');
       <button type="submit" class="btn btn-primary" name="notitietoevoegen">Notitie Toevoegen</button>
     </div>
   </form>
+</div>
+</div>
+</div>
+<div class="container mt-3">
+  <h2>Notities</h2>
+  
+  <?php
+  $notitie = notities($dbh, $patient_id);
+  
+ if(!$notitie){
+  echo "Er zijn geen notities bekend bij deze patiënt";
+ }
 
+  foreach($notitie as $notitiepatient){
+    
+    echo '<div class="card topgap2">
+      <h4 class="card-title">'.$notitiepatient['onderwerp'].'</h4>
+      <h6 class="card-title">Datum: <b>'.$mysqldate = date( 'd-m-Y', strtotime($notitiepatient['datum'] )).'</b></h6>
+      <div class="card-body">'.$notitiepatient['tekst'].'</div>
+    </div>';
+  }
+  ?>
+  </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
