@@ -59,10 +59,11 @@ if(isset($data['update_button'])){
  $postcode = $data['postcode'];
  $plaats = $data['plaats'];
  $telefoonnummer = $data['telefoonnummer'];
+ $actief = $data['actief'];
 
 
  $query = "UPDATE patient SET voor_naam=:voor_naam, achter_naam=:achter_naam, 
- adres=:adres, huisnummer=:huisnummer, postcode=:postcode, plaats=:plaats, telefoonnummer=:telefoonnummer WHERE patient_id=:patient_id LIMIT 1";
+ adres=:adres, huisnummer=:huisnummer, postcode=:postcode, plaats=:plaats, telefoonnummer=:telefoonnummer, actief=:actief WHERE patient_id=:patient_id LIMIT 1";
 
  $stmt = $dbh->prepare($query);
 
@@ -74,7 +75,8 @@ if(isset($data['update_button'])){
     ':patient_id' => $patient_id,
     ':postcode' => $postcode,
     ':plaats' => $plaats,
-    ':telefoonnummer' => $telefoonnummer
+    ':telefoonnummer' => $telefoonnummer,
+    ':actief' => $actief
  ];
 
  $startstatement = $stmt->execute($data);

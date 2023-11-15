@@ -77,6 +77,21 @@ $datum = date('Y/m/d');
                 <label for="telefoonnummer" class="form-label">Telefoonnummer</label>
                 <input type="text" class="form-control" id="telefoonnummer" name="telefoonnummer" value="<?=$result['telefoonnummer']?>" />
             </div>
+            <div class="col-md-12">
+                <label for="actief" class="form-label">Activiteit</label>
+                <select name="actief" id="actief" class="form-select">
+                  <?php
+                  if($result['actief'] == 1){
+                    echo "<option value=".$result['actief']." selected>Ja</option>";
+                    echo "<option value='0'>Nee</option>";
+                  }
+                  else{
+                    echo "<option value='1'>Ja</option>";
+                    echo "<option value=".$result['actief']." selected>Nee</option>";
+                  }
+                  ?>
+                </select>            
+              </div>
         <button type="submit" name="update_button" class="btn btn-primary topgap2 col-md-6"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i> Opslaan</button>
         <button type="button" class='btn btn-success topgap2 col-md-6' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Notitie Toevoegen</button></a>
 

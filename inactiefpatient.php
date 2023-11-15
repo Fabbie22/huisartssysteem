@@ -13,7 +13,7 @@ $dbh = dbcon();
   <link rel="stylesheet" href="./style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/382a0b3e8b.js" crossorigin="anonymous"></script>
-  <title>De Poort Huisartsen</title>
+  <title>De Poort Huisartsen - Archief Patiënten</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -28,13 +28,13 @@ $dbh = dbcon();
           <button class="nav-link active" aria-current="page" onclick="Open()"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i> Zoeken</button>
         </li>
         <li class="nav-item" id="zoekbalk" style="display:none;">
-          <input type="search" class="form-control" id="search" placeholder="Patiënt zoeken">
+          <input type="search" class="form-control" id="search" placeholder="Patiënt Zoeken">
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="#"><i class="fa-solid fa-arrow-up-z-a" style="color: #000000;"></i> Sorteren</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="inactiefpatient.php"><i class="fa-solid fa-box-archive" style="color: #000000;"></i> Archief</a>
+          <a class="nav-link active" href="inactiefpatient.php"><i class="fa-solid fa-arrow-up-z-a" style="color: #000000;"></i> Archief</a>
         </li>
         <li class="nav-item">
           <button type="button" class='btn btn-primary' style='width: 100%;' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Patiënt Toevoegen</button></a>
@@ -107,14 +107,13 @@ $dbh = dbcon();
       <th scope="col">Postcode</th>
       <th scope="col">Plaats</th>
       <th scope="col">Telefoonnummer</th>
-      <!--<th scope="col">Activiteit</th>-->
       <th scope="col">Bekijken</th>
       <th scope="col">Verwijderen</th>
     </tr>
   </thead>
   <tbody>
   <?php
-  $patient = patienten($dbh, 1);
+  $patient = patienten($dbh, 0);
 
   foreach($patient as $data){
     echo '<tr>';
@@ -123,12 +122,6 @@ $dbh = dbcon();
     echo "<td>".$data['postcode']."</td>";
     echo "<td>".$data['plaats']."</td>";
     echo "<td>".$data['telefoonnummer']."</td>";
-    //if($data['actief'] == 1){
-    //  echo "<td style='background-color:green;'></td>";
-    //}
-    //else{
-    //  echo "<td style='background-color:red;'></td>";
-    //}
     echo "<td><a href='patientgegevens.php?patient_id=".$data['patient_id']."'><button class='btn btn-primary' style='width: 100%;'><i class='fa-solid fa-eye' style='color: #ffffff;'></i> / <i class='fa-regular fa-pen-to-square' style='color: #ffffff;'></i></button></a></td>";
     echo "<td><button class='btn btn-danger' style='width: 100%;' data-href='delete.php?patient_id=".$data['patient_id']."' data-bs-toggle='modal' data-bs-target='#confirm-delete'><i class='fa-solid fa-trash-can'></button></td>";
     echo "</tr>";

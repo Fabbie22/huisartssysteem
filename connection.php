@@ -10,11 +10,11 @@ function dbcon(){
   
       return $dbh;
 }
-function patienten($dbh){
+function patienten($dbh, $activiteit){
       $patient = array();
 
-      $patientquery = $dbh->prepare("SELECT patient_id, voor_naam, achter_naam, postcode, plaats, telefoonnummer
-      FROM patient");
+      $patientquery = $dbh->prepare("SELECT patient_id, voor_naam, achter_naam, postcode, plaats, telefoonnummer, actief
+      FROM patient WHERE actief = $activiteit");
 
       $patientquery->execute();
 
@@ -27,7 +27,7 @@ function patienten($dbh){
 function notities($dbh, $id){
       $notitie = array();
 
-      $notitiequery = $dbh->prepare("SELECT notitie.datum, notitie.onderwerp, notitie.tekst  FROM patient 
+      $notitiequery = $dbh->prepare("SELECT notitie.datum, notitie.onderwerp, notitie.tekst FROM patient 
       INNER JOIN patient_has_notitie 
       ON patient_has_notitie.patient_patient_id = patient.patient_id 
       INNER JOIN notitie
