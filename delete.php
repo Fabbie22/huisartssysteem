@@ -8,7 +8,8 @@ if(isset($_GET['patient_id'])){
 
     $patientverwijder = $_GET['patient_id'];
 
-    $query = "DELETE FROM patient WHERE patient_id = :patient_id";
+    $query = "DELETE FROM patient WHERE patient_id = :patient_id
+    DELETE FROM patient_has_notitie WHERE patient_patient_id = :patient_id";
 
     $stmt = $dbh->prepare($query);
 
