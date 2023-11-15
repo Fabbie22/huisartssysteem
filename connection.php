@@ -27,7 +27,8 @@ function patienten($dbh, $activiteit){
 function notities($dbh, $id){
       $notitie = array();
 
-      $notitiequery = $dbh->prepare("SELECT notitie.datum, notitie.onderwerp, notitie.tekst FROM patient 
+      $notitiequery = $dbh->prepare("SELECT notitie.notitie_id, notitie.datum, notitie.onderwerp, notitie.tekst, patient_has_notitie.notitie_notitie_id,
+      patient_has_notitie.patient_patient_id FROM patient 
       INNER JOIN patient_has_notitie 
       ON patient_has_notitie.patient_patient_id = patient.patient_id 
       INNER JOIN notitie
