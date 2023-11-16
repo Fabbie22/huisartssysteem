@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 15 nov 2023 om 11:33
--- Serverversie: 10.4.24-MariaDB
--- PHP-versie: 8.1.6
+-- Gegenereerd op: 16 nov 2023 om 21:40
+-- Serverversie: 10.4.28-MariaDB
+-- PHP-versie: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `account`
+--
+
+CREATE TABLE `account` (
+  `account_id` int(5) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `account`
+--
+
+INSERT INTO `account` (`account_id`, `user_name`, `password`, `email`) VALUES
+(3, 'admin', 'admin', 'admin@admin.nl');
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `notitie`
 --
 
@@ -32,7 +52,7 @@ CREATE TABLE `notitie` (
   `datum` date NOT NULL,
   `onderwerp` varchar(50) NOT NULL,
   `tekst` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `notitie`
@@ -40,7 +60,9 @@ CREATE TABLE `notitie` (
 
 INSERT INTO `notitie` (`notitie_id`, `datum`, `onderwerp`, `tekst`) VALUES
 (2, '2023-11-15', 'Hoofdpijn', '- Paracetamol tegen de pijn\r\n- Zalfje tegen de pijn'),
-(3, '2023-11-15', 'Hoofdpijn', '- Paracetamol voor de pijn');
+(3, '2023-11-15', 'Hoofdpijn', '- Paracetamol voor de pijn'),
+(5, '2023-11-15', 'Inmiddels overleden', '--'),
+(6, '2023-11-15', 'Hoofdpijn', '- Paracetamol gegeven tegen de pijn');
 
 -- --------------------------------------------------------
 
@@ -58,14 +80,14 @@ CREATE TABLE `patient` (
   `plaats` varchar(255) NOT NULL,
   `telefoonnummer` varchar(100) NOT NULL,
   `actief` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `patient`
 --
 
 INSERT INTO `patient` (`patient_id`, `voor_naam`, `achter_naam`, `adres`, `huisnummer`, `postcode`, `plaats`, `telefoonnummer`, `actief`) VALUES
-(1, 'Bas', 'Kuijper', 'Visserdijk', '59', '3989 VB', 'Nieuw-Weerdinge', '95-59285182', 1),
+(1, 'Bas', 'Kuijper', 'Visserdijk', '59', '3989 VB', 'Nieuw-Weerdinge', '95-59285182', 0),
 (2, 'Niels', 'Van der Zee', 'Neptunusstraat', '15', '7168 EJ', 'Gorinchem', '51-53880882', 1),
 (3, 'Thijs', 'De Koning', 'Acacialaan', '61', '4797 UV', 'Hendrik-Ido-Ambacht', '51-85639518', 1),
 (4, 'Bart', 'Van der Sloot', 'Schoolstraat', '45', '3469 WW', 'Heerenveen', '39-93229308', 1),
@@ -80,7 +102,7 @@ INSERT INTO `patient` (`patient_id`, `voor_naam`, `achter_naam`, `adres`, `huisn
 (13, 'Tom', 'Van der Schoot', 'Anna Paulownastraat', '15', '9610 GZ', 'Loon op Zand', '69-48209120', 1),
 (14, 'Mart', 'Van der Voort', 'Beukenhof', '65', '6198 WE', 'Tiel', '48-61118986', 1),
 (15, 'Arjan', 'Van der Vaart', 'Havenstraat', '88', '1705 DM', 'Maassluis', '42-81849325', 1),
-(16, 'Niek', 'Vos', 'Dokter van Doornplein', '39', '3364 JR', 'Gouda', '06-46682270', 1),
+(16, 'Niek', 'Vos', 'Dokter van Doornplein', '39', '3364 JR', 'Gouda', '06-46682270', 0),
 (17, 'Chris', 'Van der Vliet', 'Graaf Florisstraat', '2', '4727 CW', 'Geldrop', '27-08391565', 1),
 (18, 'Thomas', 'Martijnse', 'Spoorstraat', '22', '1397 GG', 'Sittard', '70-74131295', 1),
 (19, 'Jelle', 'De Bruin', 'Zeeheldenstraat', '1', '0729 IU', 'Gouda', '80-40536146', 1),
@@ -326,10 +348,11 @@ INSERT INTO `patient` (`patient_id`, `voor_naam`, `achter_naam`, `adres`, `huisn
 (259, 'Stan', 'Vink', 'Wilhelminapark', '15', '1161 OY', 'Sneek', '21-43008900', 1),
 (260, 'Rick', 'Van der Stoep', 'Industrieweg', '61', '4724 ZI', 'Spaarndam', '18-90442770', 1),
 (267, 'Yucan', 'Ye', 'Henkiswegx', '2', '6888 KL', 'Henkiszoek', '33-89845678', 1),
-(268, 'Max', 'Elzerman', 'Weeldijk ', '1', '6880 LO', 'Bennekom', '+31 123 456 78', 1),
+(268, 'Max', 'Elzerman', 'Weeldijk ', '1', '4758 TK', 'Standdaarbuiten', '+31 123 456 78', 1),
 (269, 'Fabian', 'Walter', 'Swammerdamlaan', '6', '6721 BK', 'Bennekom', '+31 123 456 78', 1),
 (270, 'Luuk', 'Nieuwkoop', 'Knoopkruid ', '22', '6721 RA', 'Bennekom', '+31 123 456 789', 1),
-(271, 'Sam', 'de Wilde', 'Bovenbuurtweg', '1', '5050 KK', 'Ede', '+31 123 456 789', 1);
+(271, 'Sam', 'de Wilde', 'Bovenbuurtweg', '1', '5050 KK', 'Ede', '+31 123 456 789', 1),
+(272, 'Jippe', 'Visser', 'Toon Kokhof', '8', '1944 PE', 'Beverwijk', '+31 123 456 78', 1);
 
 -- --------------------------------------------------------
 
@@ -340,7 +363,7 @@ INSERT INTO `patient` (`patient_id`, `voor_naam`, `achter_naam`, `adres`, `huisn
 CREATE TABLE `patient_has_notitie` (
   `patient_patient_id` int(5) NOT NULL,
   `notitie_notitie_id` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `patient_has_notitie`
@@ -348,11 +371,19 @@ CREATE TABLE `patient_has_notitie` (
 
 INSERT INTO `patient_has_notitie` (`patient_patient_id`, `notitie_notitie_id`) VALUES
 (1, 3),
-(270, 2);
+(1, 5),
+(270, 2),
+(272, 6);
 
 --
 -- Indexen voor geëxporteerde tabellen
 --
+
+--
+-- Indexen voor tabel `account`
+--
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`account_id`);
 
 --
 -- Indexen voor tabel `notitie`
@@ -378,16 +409,22 @@ ALTER TABLE `patient_has_notitie`
 --
 
 --
+-- AUTO_INCREMENT voor een tabel `account`
+--
+ALTER TABLE `account`
+  MODIFY `account_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT voor een tabel `notitie`
 --
 ALTER TABLE `notitie`
-  MODIFY `notitie_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `notitie_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT voor een tabel `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patient_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
+  MODIFY `patient_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=273;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
