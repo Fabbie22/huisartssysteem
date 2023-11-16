@@ -45,7 +45,10 @@ $dbh = dbcon();
           <button type="button" class='btn btn-primary' style='width: 100%;' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Patiënt Toevoegen</button></a>
         </li>
       </ul>
-  </div>
+    </div>
+    <span class="navbar-text">
+        <a class="text-dark" href="./logout.php">Uitloggen</a>
+    </span>
 </nav>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
