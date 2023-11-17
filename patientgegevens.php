@@ -19,12 +19,12 @@ $datum = date('Y/m/d');
   <link rel="stylesheet" href="./style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/382a0b3e8b.js" crossorigin="anonymous"></script>
-  <title>De Poort Huisartsen</title>
+  <title>HiX - Patient</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php"><i class="fa-solid fa-house-medical" style="color: #000000;"></i> De Poort Huisartsen</a>
+    <a class="navbar-brand" href="index.php"><i class="fa-solid fa-house-medical" style="color: #000000;"></i> HiX</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -87,12 +87,12 @@ $datum = date('Y/m/d');
                 <select name="actief" id="actief" class="form-select">
                   <?php
                   if($result['actief'] == 1){
-                    echo "<option value=".$result['actief']." selected>Ja</option>";
-                    echo "<option value='0'>Nee</option>";
+                    echo "<option value=".$result['actief']." selected>Actief</option>";
+                    echo "<option value='0'>Inactief</option>";
                   }
                   else{
-                    echo "<option value='1'>Ja</option>";
-                    echo "<option value=".$result['actief']." selected>Nee</option>";
+                    echo "<option value='1'>Actief</option>";
+                    echo "<option value=".$result['actief']." selected>Inactief</option>";
                   }
                   ?>
                 </select>            

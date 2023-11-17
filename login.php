@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="./style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/382a0b3e8b.js" crossorigin="anonymous"></script>
-  <title>De Poort Huisartsen</title>
+  <title>HiX - Inloggen</title>
 </head>
 <body class="loginscherm">
 </body>
 <div class="login">
-    <h1>Inloggen</h1>
+    <h1>Inloggen HiX</h1>
     <form action="authentication.php" method="POST">
         <label for="username">
             <i class="fas fa-user"></i>
