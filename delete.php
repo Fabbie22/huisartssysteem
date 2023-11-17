@@ -8,8 +8,7 @@ if(isset($_GET['patient_id'])){
 
     $patientverwijder = $_GET['patient_id'];
 
-    $query = "DELETE FROM patient WHERE patient_id = :patient_id
-    DELETE FROM patient_has_notitie WHERE patient_patient_id = :patient_id";
+    $query = "DELETE FROM patient WHERE patient_id = :patient_id";
 
     $stmt = $dbh->prepare($query);
 
@@ -22,6 +21,7 @@ if(isset($_GET['patient_id'])){
     header("Location: index.php");
 }
 if(isset($_GET['notitie_notitie_id'])){
+
     $notitieverwijder = $_GET['notitie_notitie_id'];
     $patientnotitieverwijder = $_GET['patient_patient_id'];
 

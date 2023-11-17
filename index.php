@@ -132,21 +132,29 @@ $dbh = dbcon();
     //  echo "<td style='background-color:green;'></td>";
     //}
     //else{
-    //  echo "<td style='background-color:red;'></td>";
-    //}
-    echo "<td><a href='patientgegevens.php?patient_id=".$data['patient_id']."'><button class='btn btn-primary' style='width: 100%;'><i class='fa-solid fa-eye' style='color: #ffffff;'></i> / <i class='fa-regular fa-pen-to-square' style='color: #ffffff;'></i></button></a></td>";
-    echo "<td><button class='btn btn-danger' style='width: 100%;' data-href='delete.php?patient_id=".$data['patient_id']."' data-bs-toggle='modal' data-bs-target='#confirm-delete'><i class='fa-solid fa-trash-can'></button></td>";
-    echo "</tr>";
-  }
-?>
+      //  echo "<td style='background-color:red;'></td>";
+      //}
+      echo "<td><a href='patientgegevens.php?patient_id=".$data['patient_id']."'><button class='btn btn-primary' style='width: 100%;'><i class='fa-solid fa-eye' style='color: #ffffff;'></i> / <i class='fa-regular fa-pen-to-square' style='color: #ffffff;'></i></button></a></td>";
+      echo '<td><button class="btn btn-danger" style="width: 100%;" data-href=delete.php?patient_id='.$data['patient_id'].' data-bs-toggle="modal" data-bs-target="#confirm-delete"><i class="fa-solid fa-trash-can"></i></button></td>';
+      echo "</tr>";
+    }
+    ?>
   </tbody>
 </table>
+<script>  
+$(document).ready(function() {
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+    var hrefValue = $(e.relatedTarget).data('href');
+    $(this).find('.btn-ok').attr('href', hrefValue);
+  });
+});
+</script>
 <script>
 $(document).ready(function(){
   $('#search').keyup(function(){
     search_table($(this).val());
   });
-
+  
   function search_table(value){
     $('#mytable tbody tr').each(function(){
       var found = false;
@@ -219,11 +227,6 @@ function sort(n) {
     }
   }
 }
-</script>
-<script>  
-  $('#confirm-delete').on('show.bs.modal', function(e) {
-    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-  });
 </script>
 <script src="script.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

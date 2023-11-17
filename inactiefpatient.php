@@ -36,10 +36,7 @@ $dbh = dbcon();
           <input type="search" class="form-control" id="search" placeholder="Patiënt Zoeken">
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#"><i class="fa-solid fa-arrow-up-z-a" style="color: #000000;"></i> Sorteren</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="inactiefpatient.php"><i class="fa-solid fa-arrow-up-z-a" style="color: #000000;"></i> Archief</a>
+          <a class="nav-link active" href="index.php"><i class="fa-solid fa-bars" style="color: #000000;"></i> Overzicht</a>
         </li>
         <li class="nav-item">
           <button type="button" class='btn btn-primary' style='width: 100%;' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Patiënt Toevoegen</button></a>
@@ -110,11 +107,11 @@ $dbh = dbcon();
 <table class="table" id="mytable">
   <thead>
     <tr>
-      <th scope="col">Voornaam</th>
-      <th scope="col">Achternaam</th>
-      <th scope="col">Postcode</th>
-      <th scope="col">Plaats</th>
-      <th scope="col">Telefoonnummer</th>
+    <th onclick="sort(0)" scope="col">Voornaam</th>
+      <th onclick="sort(1)" scope="col">Achternaam</th>
+      <th onclick="sort(2)" scope="col">Postcode</th>
+      <th onclick="sort(3)" scope="col">Plaats</th>
+      <th onclick="sort(4)" scope="col">Telefoonnummer</th>
       <th scope="col">Bekijken</th>
       <th scope="col">Verwijderen</th>
     </tr>
@@ -137,6 +134,11 @@ $dbh = dbcon();
 ?>
   </tbody>
 </table>
+  <script>  
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+      $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+  </script>
 <script>
 $(document).ready(function(){
   $('#search').keyup(function(){
@@ -161,10 +163,61 @@ $(document).ready(function(){
 });
 
 </script>
-<script>  
-  $('#confirm-delete').on('show.bs.modal', function(e) {
-    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-  });
+<script>
+function sort(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("mytable");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
 </script>
 <script src="script.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
