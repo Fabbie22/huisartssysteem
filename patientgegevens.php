@@ -31,10 +31,13 @@ $datum = date('Y/m/d');
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="index.php"><i class="fa-solid fa-book-medical" style="color: #000000;"></i> Overzicht</a>
+            <a class="nav-link active" href="index.php"><i class="fa-solid fa-bars" style="color: #000000;"></i> Overzicht</a>
           </li>
         </ul>
       </div>
+    <span class="navbar-text">
+      <a class="text-dark" href="./logout.php"><button class="btn btn-primary"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Uitloggen</button></a>
+    </span>
     </nav>
     <?php
     if(isset($_GET['patient_id']))

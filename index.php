@@ -43,8 +43,11 @@ $dbh = dbcon();
         </li>
       </ul>
     </div>
+    <span class="navbar-text" style="margin-right: 1%;">
+      <a class="text-dark" href="./register.php"><button class="btn btn-success"><i class="fa-solid fa-address-card" style="color: #ffffff;"></i> Registreren</button></a>
+    </span>
     <span class="navbar-text">
-        <a class="text-dark" href="./logout.php">Uitloggen</a>
+      <a class="text-dark" href="./logout.php"><button class="btn btn-primary"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Uitloggen</button></a>
     </span>
 </nav>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

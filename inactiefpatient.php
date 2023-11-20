@@ -44,8 +44,8 @@ $dbh = dbcon();
       </ul>
   </div>
   <span class="navbar-text">
-        <a class="text-dark" href="./logout.php">Uitloggen</a>
-    </span>
+    <a class="text-dark" href="./logout.php"><button class="btn btn-primary"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Uitloggen</button></a>
+  </span>
 </nav>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
