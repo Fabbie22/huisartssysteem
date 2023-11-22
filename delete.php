@@ -19,6 +19,7 @@ if(isset($_GET['patient_id'])){
     $stmt->execute($data);
 
     header("Location: index.php");
+    
 }
 if(isset($_GET['notitie_notitie_id'])){
 

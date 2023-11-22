@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("./connection.php");
 
 $dbh = dbcon();
@@ -12,7 +13,7 @@ if(isset($data['patienttoevoegen'])){
       $addpatientquery = $dbh->prepare("INSERT INTO patient (voor_naam, achter_naam, adres, huisnummer, postcode, plaats, telefoonnummer, actief) 
       VALUES (:voor_naam, :achter_naam, :adres, :huisnummer, :postcode, :plaats, :telefoonnummer, 1)");
       
-      $addpatientquery->execute(array(
+      $querycheck = $addpatientquery->execute(array(
             'voor_naam' => $data['voor_naam'],
             'achter_naam' => $data['achter_naam'],
             'adres' => $data['adres'],
@@ -22,7 +23,16 @@ if(isset($data['patienttoevoegen'])){
             'telefoonnummer' => $data['telefoonnummer']
       ));
       
-      echo "<script>alert('$naam is toegevoegd aan de database')</script>";
+      if($querycheck){
+        $_SESSION['addmessage'] = "Patiënt toegevoegd";
+        header('Location: index.php');
+        exit(0);
+      }
+    else{
+        $_SESSION['addmessage'] = "Patiënt toevoegen mislukt";
+        header('Location: index.php');
+        exit(0);
+      }
       
       header("Location: ./index.php");
 }
@@ -42,12 +52,21 @@ if(isset($data['notitietoevoegen'])){
 
       $addnotitietopatient = $dbh->prepare("INSERT INTO patient_has_notitie (patient_patient_id, notitie_notitie_id) VALUES (:patient_patient_id, :notitie_notitie_id)");
 
-      $addnotitietopatient->execute(array(
+      $querycheck = $addnotitietopatient->execute(array(
             'patient_patient_id' => $data['patient_id'],
             'notitie_notitie_id' => $notitie_id
       ));
 
-      header('Location: patientgegevens.php?patient_id='.$data['patient_id'].'');
+      if($querycheck){
+            $_SESSION['notitiemessage'] = "Notitie toegevoegd";
+            header('Location: patientgegevens.php?patient_id='.$data['patient_id'].'');
+            exit(0);
+          }
+        else{
+            $_SESSION['notitiemessage'] = "Notitie toevoegen mislukt";
+            header('Location: patientgegevens.php?patient_id='.$data['patient_id'].'');
+            exit(0);
+          }
 }
 
 if(isset($data['update_button'])){

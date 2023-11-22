@@ -50,6 +50,24 @@ $dbh = dbcon();
       <a class="text-dark" href="./logout.php"><button class="btn btn-primary"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Uitloggen</button></a>
     </span>
 </nav>
+<?php if(isset($_SESSION['deletemessage'])) :  ?>
+  <div class="alert alert-primary alert-dismissible" role="alert">
+       <div><?= $_SESSION['deletemessage'] ?></div>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+            <?php 
+                unset($_SESSION['deletemessage']);
+                endif; 
+            ?>
+<?php if(isset($_SESSION['addmessage'])) :  ?>
+  <div class="alert alert-primary alert-dismissible" role="alert">
+       <div><?= $_SESSION['addmessage'] ?></div>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+            <?php 
+                unset($_SESSION['addmessage']);
+                endif; 
+            ?>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
