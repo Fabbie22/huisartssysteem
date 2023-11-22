@@ -43,6 +43,9 @@ $dbh = dbcon();
         </li>
       </ul>
   </div>
+  <span class="navbar-text" style="margin-right: 1%;">
+    <a class="text-dark" href="./index.php"><button class="btn btn-success"><i class="fa fa-reply" style="color: #ffffff;"></i> Terug naar overzicht</button></a>
+  </span>
   <span class="navbar-text">
     <a class="text-dark" href="./logout.php"><button class="btn btn-primary"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Uitloggen</button></a>
   </span>
