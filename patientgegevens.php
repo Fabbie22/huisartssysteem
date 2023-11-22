@@ -61,35 +61,35 @@ $dbh = dbcon();
     <div class="row">
       <div class="col-md-6">
         <label for="voor_naam" class="form-label">Voornaam</label>
-        <input type="text" class="form-control" id="voor_naam" name="voor_naam" value="<?=$result['voor_naam']?>"  />
+        <input type="text" class="form-control" id="voor_naam" name="voor_naam" value="<?=$result['voor_naam']?>" disabled  />
       </div>
       <div class="col-md-6">
         <label for="achter_naam" class="form-label">Achternaam</label>
-        <input type="text" class="form-control" id="achter_naam" name="achter_naam" value="<?=$result['achter_naam']?>" />
+        <input type="text" class="form-control" id="achter_naam" name="achter_naam" value="<?=$result['achter_naam']?>" disabled />
       </div>
       <div class="col-md-8">
         <label for="adres" class="form-label">Adres</label>
-        <input type="text" class="form-control" id="adres" name="adres" value="<?=$result['adres']?>" />
+        <input type="text" class="form-control" id="adres" name="adres" value="<?=$result['adres']?>" disabled />
       </div>
       <div class="col-md-4">
         <label for="huisnummer" class="form-label">Huisnummer</label>
-        <input type="text" class="form-control" id="huisnummer" name="huisnummer" value="<?=$result['huisnummer']?>" />
+        <input type="text" class="form-control" id="huisnummer" name="huisnummer" value="<?=$result['huisnummer']?>" disabled />
       </div>
       <div class="col-md-6">
         <label for="postcode" class="form-label">Postcode</label>
-        <input type="text" class="form-control" id="postcode" name="postcode" value="<?=$result['postcode']?>" />
+        <input type="text" class="form-control" id="postcode" name="postcode" value="<?=$result['postcode']?>" disabled/>
       </div>
       <div class="col-md-6">
         <label for="plaats" class="form-label">Plaats</label>
-        <input type="text" class="form-control" id="plaats" name="plaats" value="<?=$result['plaats']?>" />
+        <input type="text" class="form-control" id="plaats" name="plaats" value="<?=$result['plaats']?>" disabled/>
       </div>
       <div class="col-md-12">
         <label for="telefoonnummer" class="form-label">Telefoonnummer</label>
-        <input type="text" class="form-control" id="telefoonnummer" name="telefoonnummer" value="<?=$result['telefoonnummer']?>" />
+        <input type="text" class="form-control" id="telefoonnummer" name="telefoonnummer" value="<?=$result['telefoonnummer']?>" disabled/>
       </div>
       <div class="col-md-12">
         <label for="actief" class="form-label">Activiteit</label>
-        <select name="actief" id="actief" class="form-select">
+        <select name="actief" id="actief" class="form-select" disabled>
           <?php
                   if($result['actief'] == 1){
                     echo "<option value=".$result['actief']." selected>Actief</option>";
@@ -102,8 +102,10 @@ $dbh = dbcon();
                   ?>
                 </select>            
               </div>
-              <button type="submit" name="update_button" class="btn btn-primary topgap2 col-md-6"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i> Opslaan</button>
-              <button type="button" class='btn btn-success topgap2 col-md-6' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Notitie Toevoegen</button></a>
+              <button type="button" id="lock" class="btn btn-secondary topgap2 col-md-4" onclick="toggleInputs()">
+              <i id="lockIcon" class="fa-solid fa-lock" style="color: #ffffff;"></i> Bewerken</button>              
+              <button type="submit" name="update_button" class="btn btn-primary topgap2 col-md-4"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i> Opslaan</button>
+              <button type="button" class='btn btn-success topgap2 col-md-4' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Notitie Toevoegen</button></a>
               
             </form>
   </div>
@@ -181,6 +183,7 @@ $(document).ready(function() {
   });
 });
 </script>
+<script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
