@@ -99,7 +99,7 @@ if(isset($data['update_button'])){
     ':actief' => $actief
  ];
 
- $startstatement = $stmt->execute($data);
+ $querystatement = $stmt->execute($data);
 
  if($query_execute){
       header('Location: patientgegevens.php?patient_id='.$data['patient_id'].'');

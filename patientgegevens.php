@@ -172,7 +172,7 @@ $dbh = dbcon();
   $notitie = notities($dbh, $patient_id);
   
   if(!$notitie){
-    echo "Er zijn geen notities bekend bij deze patiënt";
+    echo "Er is geen historie bekend bij deze patiënt";
   }
   
   foreach($notitie as $notitiepatient){
