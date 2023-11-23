@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 16 nov 2023 om 21:40
+-- Gegenereerd op: 23 nov 2023 om 01:26
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -39,7 +39,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`account_id`, `user_name`, `password`, `email`) VALUES
-(3, 'admin', 'admin', 'admin@admin.nl');
+(4, 'admin', '$2y$10$0DWXrquCKTDNdjfsmEXxDelfKNbyE85nSOJSCT3fz/ZAPvYKCvHOm', 'fabianwalter8@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -50,19 +50,20 @@ INSERT INTO `account` (`account_id`, `user_name`, `password`, `email`) VALUES
 CREATE TABLE `notitie` (
   `notitie_id` int(5) NOT NULL,
   `datum` date NOT NULL,
-  `onderwerp` varchar(50) NOT NULL,
-  `tekst` varchar(1000) NOT NULL
+  `diagnose` varchar(150) NOT NULL,
+  `symptomen` varchar(300) NOT NULL,
+  `behandeling` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `notitie`
 --
 
-INSERT INTO `notitie` (`notitie_id`, `datum`, `onderwerp`, `tekst`) VALUES
-(2, '2023-11-15', 'Hoofdpijn', '- Paracetamol tegen de pijn\r\n- Zalfje tegen de pijn'),
-(3, '2023-11-15', 'Hoofdpijn', '- Paracetamol voor de pijn'),
-(5, '2023-11-15', 'Inmiddels overleden', '--'),
-(6, '2023-11-15', 'Hoofdpijn', '- Paracetamol gegeven tegen de pijn');
+INSERT INTO `notitie` (`notitie_id`, `datum`, `diagnose`, `symptomen`, `behandeling`) VALUES
+(2, '2023-11-15', 'Hoofdpijn', '', '- Paracetamol tegen de pijn\n- Zalfje tegen de pijn'),
+(3, '2023-11-15', 'Hoofdpijn', '', '- Paracetamol voor de pijn'),
+(6, '2023-11-15', 'Hoofdpijn', '', '- Paracetamol gegeven tegen de pijn'),
+(18, '2023-11-23', 'TIA', 'Geen beweging mogelijk, trillen handen', 'Antibiotica\n, Dyclofinac\n, Controle bloedproppen\n   ,, Bloedonderzoek lopen');
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,6 @@ CREATE TABLE `patient` (
 INSERT INTO `patient` (`patient_id`, `voor_naam`, `achter_naam`, `adres`, `huisnummer`, `postcode`, `plaats`, `telefoonnummer`, `actief`) VALUES
 (1, 'Bas', 'Kuijper', 'Visserdijk', '59', '3989 VB', 'Nieuw-Weerdinge', '95-59285182', 0),
 (2, 'Niels', 'Van der Zee', 'Neptunusstraat', '15', '7168 EJ', 'Gorinchem', '51-53880882', 1),
-(3, 'Thijs', 'De Koning', 'Acacialaan', '61', '4797 UV', 'Hendrik-Ido-Ambacht', '51-85639518', 1),
 (4, 'Bart', 'Van der Sloot', 'Schoolstraat', '45', '3469 WW', 'Heerenveen', '39-93229308', 1),
 (5, 'Mathijs', 'Van der Kraan', 'Callenburgstraat', '72', '7048 HN', 'Zaanstad', '47-32803157', 1),
 (6, 'Michiel', 'Van der Meer', 'Rembrandtlaan', '26', '5864 FF', 'Vierakker', '26-04083764', 1),
@@ -371,7 +371,7 @@ CREATE TABLE `patient_has_notitie` (
 
 INSERT INTO `patient_has_notitie` (`patient_patient_id`, `notitie_notitie_id`) VALUES
 (1, 3),
-(1, 5),
+(2, 18),
 (270, 2),
 (272, 6);
 
@@ -412,19 +412,19 @@ ALTER TABLE `patient_has_notitie`
 -- AUTO_INCREMENT voor een tabel `account`
 --
 ALTER TABLE `account`
-  MODIFY `account_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `account_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT voor een tabel `notitie`
 --
 ALTER TABLE `notitie`
-  MODIFY `notitie_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `notitie_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT voor een tabel `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patient_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=273;
+  MODIFY `patient_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
 
 --
 -- Beperkingen voor geëxporteerde tabellen

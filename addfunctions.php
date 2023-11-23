@@ -39,11 +39,12 @@ if(isset($data['patienttoevoegen'])){
 
 if(isset($data['notitietoevoegen'])){
 
-      $addnotitiequery = $dbh->prepare("INSERT INTO notitie (datum, onderwerp, tekst) VALUES (NOW(), :onderwerp, :tekst)");
+      $addnotitiequery = $dbh->prepare("INSERT INTO notitie (datum, diagnose, symptomen, behandeling) VALUES (NOW(), :diagnose, :symptomen, :behandeling)");
 
       $addnotitiequery->execute(array(
-            'onderwerp' => $data['onderwerp'],
-            'tekst' => $data['tekst']
+            'diagnose' => $data['diagnose'],
+            'symptomen' => $data['symptomen'],
+            'behandeling' => $data['behandeling']
       ));
 
       $notitie_id = $dbh->lastInsertId();

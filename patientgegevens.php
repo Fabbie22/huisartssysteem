@@ -130,11 +130,14 @@ $dbh = dbcon();
         <form action="./addfunctions.php" method="post">
           <input type="hidden" name="patient_id" value="<?=$result['patient_id']?>" />
           <div class="row">
-            <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="Onderwerp (max 50 tekens)" aria-label="Onderwerp" name="onderwerp" id="onderwerp" maxlength="50" required>
+            <div class="col-md-12 topgap">
+              <input type="text" class="form-control" placeholder="Diagnose (max 150 tekens)" aria-label="Diagnose" name="diagnose" id="diagnose" maxlength="150" required>
             </div>
             <div class="col-md-12 topgap">
-              <textarea class="form-control" placeholder="Hier je tekst (max 1000 tekens) " aria-label="Hier je tekst" name="tekst" id="tekst" maxlength="1000" required></textarea>
+              <input type="text" class="form-control" placeholder="Symptomen (max 300 tekens)" aria-label="Symptomen" name="symptomen" id="symptomen" maxlength="300" required>
+            </div>
+            <div class="col-md-12 topgap">
+              <textarea class="form-control" placeholder="Hier je behandeling (max 1000 tekens) " aria-label="Hier je tekst" name="behandeling" id="behandeling" maxlength="1000" required></textarea>
             </div>
           </div>
         </div>
@@ -163,7 +166,7 @@ $dbh = dbcon();
   </div>
 </div>
 <div class="container mt-3">
-  <h2>Notities</h2>
+  <h2>Historie</h2>
   
   <?php
   $notitie = notities($dbh, $patient_id);
@@ -176,9 +179,9 @@ $dbh = dbcon();
     $notitie_notitie_id = $notitiepatient['notitie_notitie_id'];
     $patient_patient_id = $notitiepatient['patient_patient_id'];
     echo '<div class="card topgap2">
-    <h4 class="card-title">'.$notitiepatient['onderwerp'].'</h4>
-    <h6 class="card-title">Datum: <b>'.$mysqldate = date( 'd-m-Y', strtotime($notitiepatient['datum'] )).'</b></h6>
-    <div class="card-body">'.$notitiepatient['tekst'].'</div>
+    <h4 class="card-title"><b>Diagnose: </b>'.$notitiepatient['diagnose'].'</h4>
+    <h6 class="card-title">Datum: <b>'.$mysqldate = date('d-m-Y', strtotime($notitiepatient['datum'] )).'</b></h6>
+    <div class="card-body"><p><b>Symptomen: </b>'.$notitiepatient['symptomen'].'</p><p><b> Behandeling: </b>'.$notitiepatient['behandeling'].'</p></div>
     <button class="btn btn-danger" data-href=delete.php?notitie_notitie_id=' . $notitie_notitie_id. '&patient_patient_id='. $patient_patient_id.' data-bs-toggle="modal" data-bs-target="#confirm-delete"><i class="fa-solid fa-trash-can"></i></button>
     </div>';
   }
