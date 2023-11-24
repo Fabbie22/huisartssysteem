@@ -19,6 +19,7 @@ $dbh = dbcon();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/382a0b3e8b.js" crossorigin="anonymous"></script>
   <title>HiX - Patient</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.jpg">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
@@ -42,7 +43,7 @@ $dbh = dbcon();
     </span>
     </nav>
     <?php if(isset($_SESSION['notitiemessage'])) :  ?>
-  <div class="alert alert-primary alert-dismissible" role="alert">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
        <div><?= $_SESSION['notitiemessage'] ?></div>
        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

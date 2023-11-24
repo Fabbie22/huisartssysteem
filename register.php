@@ -19,6 +19,7 @@ $dbh = dbcon();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/382a0b3e8b.js" crossorigin="anonymous"></script>
   <title>HiX - Patient Overzicht</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.jpg">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
