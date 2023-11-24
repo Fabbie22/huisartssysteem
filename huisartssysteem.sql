@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 23 nov 2023 om 01:26
--- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.2.4
+-- Gegenereerd op: 24 nov 2023 om 14:36
+-- Serverversie: 10.4.24-MariaDB
+-- PHP-versie: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `account` (
   `user_name` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `account`
@@ -53,7 +53,7 @@ CREATE TABLE `notitie` (
   `diagnose` varchar(150) NOT NULL,
   `symptomen` varchar(300) NOT NULL,
   `behandeling` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `notitie`
@@ -81,7 +81,7 @@ CREATE TABLE `patient` (
   `plaats` varchar(255) NOT NULL,
   `telefoonnummer` varchar(100) NOT NULL,
   `actief` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `patient`
@@ -91,7 +91,6 @@ INSERT INTO `patient` (`patient_id`, `voor_naam`, `achter_naam`, `adres`, `huisn
 (1, 'Bas', 'Kuijper', 'Visserdijk', '59', '3989 VB', 'Nieuw-Weerdinge', '95-59285182', 0),
 (2, 'Niels', 'Van der Zee', 'Neptunusstraat', '15', '7168 EJ', 'Gorinchem', '51-53880882', 1),
 (4, 'Bart', 'Van der Sloot', 'Schoolstraat', '45', '3469 WW', 'Heerenveen', '39-93229308', 1),
-(5, 'Mathijs', 'Van der Kraan', 'Callenburgstraat', '72', '7048 HN', 'Zaanstad', '47-32803157', 1),
 (6, 'Michiel', 'Van der Meer', 'Rembrandtlaan', '26', '5864 FF', 'Vierakker', '26-04083764', 1),
 (7, 'Teun', 'Van der Westen', 'Beukenhof', '7', '9658 KY', 'Sint-Oedenrode', '79-79978623', 0),
 (8, 'Edwin', 'Smeets', 'Beatrixstraat', '29', '4936 NN', 'Uithuizen', '76-53635157', 1),
@@ -363,7 +362,7 @@ INSERT INTO `patient` (`patient_id`, `voor_naam`, `achter_naam`, `adres`, `huisn
 CREATE TABLE `patient_has_notitie` (
   `patient_patient_id` int(5) NOT NULL,
   `notitie_notitie_id` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `patient_has_notitie`
@@ -418,13 +417,13 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT voor een tabel `notitie`
 --
 ALTER TABLE `notitie`
-  MODIFY `notitie_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `notitie_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT voor een tabel `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patient_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `patient_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
@@ -434,8 +433,8 @@ ALTER TABLE `patient`
 -- Beperkingen voor tabel `patient_has_notitie`
 --
 ALTER TABLE `patient_has_notitie`
-  ADD CONSTRAINT `patient_has_notitie_ibfk_1` FOREIGN KEY (`patient_patient_id`) REFERENCES `patient` (`patient_id`),
-  ADD CONSTRAINT `patient_has_notitie_ibfk_2` FOREIGN KEY (`notitie_notitie_id`) REFERENCES `notitie` (`notitie_id`);
+  ADD CONSTRAINT `patient_has_notitie_ibfk_1` FOREIGN KEY (`patient_patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `patient_has_notitie_ibfk_2` FOREIGN KEY (`notitie_notitie_id`) REFERENCES `notitie` (`notitie_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
