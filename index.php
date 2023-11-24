@@ -156,6 +156,38 @@ $dbh = dbcon();
   </tbody>
 </table>
   </div>
+  <div id="pagination"></div>
+  <script>
+function paginate(table, page_size) {
+  var items = []; // Plaats hier je lijst met items
+var itemsPerPage = 25;
+var numPages = Math.ceil(items.length / itemsPerPage);
+
+function displayItems(pageNumber) {
+  var startIndex = (pageNumber - 1) * itemsPerPage;
+  var endIndex = startIndex + itemsPerPage;
+  var paginatedItems = items.slice(startIndex, endIndex);
+
+  // Toon de items op de pagina (bijvoorbeeld in de console)
+  console.log("Items op pagina " + pageNumber + ": ", paginatedItems);
+}
+
+// Voorbeeld van hoe je de items per pagina kunt weergeven
+for (var i = 1; i <= numPages; i++) {
+  var link = $('<a href="#" class="page-link">' + i + '</a>');
+  link.data('page', i);
+  pagination.append(link);
+  
+  // Voeg een eventlistener toe voor paginaklikken
+  link.on('click', function() {
+    var pageNumber = $(this).data('page');
+    displayItems(pageNumber);
+    // Voeg hier code toe om de items daadwerkelijk op de pagina weer te geven
+    // Dit kan variëren afhankelijk van je specifieke toepassing (bijvoorbeeld het updaten van de DOM met de juiste items)
+  });
+}
+
+</script>
 <script>  
 $(document).ready(function() {
   $('#confirm-delete').on('show.bs.modal', function(e) {

@@ -22,3 +22,41 @@ function toggleInputs() {
     lockIcon.classList.add('fa-lock');
 }
 }
+function paginate(table, page_size) {
+  var tbody = table.find('tbody');
+  var rows = tbody.find('tr');
+  var num_pages = Math.ceil(rows.length / page_size);
+
+  // Create pagination links
+  var pagination = $('#pagination');
+  pagination.empty();
+  for (var i = 1; i <= num_pages; i++) {
+    var link = $('<a href="#" class="page-link">' + i + '</a>');
+    link.data('page', i);
+    pagination.append(link);
+  }
+
+  // Show initial page
+  showPage(1);
+
+  // Handle pagination link clicks
+  pagination.on('click', 'a.page-link', function(e) {
+    e.preventDefault();
+    var page = $(this).data('page');
+    showPage(page);
+  });
+
+  // Function to display rows for a specific page
+  function showPage(page) {
+    var start = (page - 1) * page_size;
+    var end = start + page_size;
+    rows.hide().slice(start, end).show();
+  }
+}
+
+// Call pagination function on document ready
+$(document).ready(function() {
+  var table = $('#mytable');
+  var page_size = 10; // Number of rows per page
+  paginate(table, page_size);
+});
